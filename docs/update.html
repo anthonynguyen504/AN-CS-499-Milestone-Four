@@ -7,6 +7,7 @@
     <title>Update Animal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
+        /* General body styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -14,12 +15,14 @@
             padding: 20px;
         }
 
+        /* Main heading style */
         h1 {
             color: #4CAF50;
             text-align: center;
             margin-bottom: 30px;
         }
 
+        /* Form container styles */
         form {
             max-width: 500px;
             margin: auto;
@@ -29,11 +32,13 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* Label styles */
         label {
             font-weight: bold;
             color: #333;
         }
 
+        /* Input styles for text and date fields */
         input[type="text"],
         input[type="date"] {
             width: 100%;
@@ -45,6 +50,7 @@
             box-sizing: border-box;
         }
 
+        /* Submit button styles */
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
@@ -56,10 +62,12 @@
             transition: background-color 0.3s ease;
         }
 
+        /* Hover effect for the submit button */
         input[type="submit"]:hover {
             background-color: #45a049;
         }
 
+        /* Link styles */
         a {
             color: #4CAF50;
             text-decoration: none;
@@ -69,6 +77,7 @@
             margin-top: 20px;
         }
 
+        /* Hover effect for links */
         a:hover {
             text-decoration: underline;
         }
@@ -76,12 +85,15 @@
 </head>
 
 <body>
+    <!-- Page heading -->
     <h1>Update Animal Information</h1>
 
+    <!-- Form for updating animal information -->
     <form method="POST" action="{{ url_for('update_animal') }}">
-        <!-- Pre-filled fields -->
+        <!-- Hidden field for animal ID -->
         <input type="hidden" name="animal_id" value="{{ animal.animal_id }}" required>
 
+        <!-- Input fields for animal details -->
         <label for="name">Name:</label><br>
         <input type="text" name="name" value="{{ animal.name }}" required><br>
 
@@ -100,9 +112,11 @@
         <label for="outcome_type">Outcome Type:</label><br>
         <input type="text" name="outcome_type" value="{{ animal.outcome_type }}"><br>
 
+        <!-- Submit button to update animal information -->
         <input type="submit" value="Update Animal">
     </form>
 
+    <!-- Link to return to the home page -->
     <a href="{{ url_for('home') }}">Back to Home</a>
 </body>
 
