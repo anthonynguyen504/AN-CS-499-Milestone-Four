@@ -2,11 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- Meta tags for character encoding and responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
     <title>Animal Shelter</title>
+
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
     <style>
+        /* Style for the entire body */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -14,18 +21,21 @@
             padding: 20px;
         }
 
+        /* Heading style */
         h1 {
             color: #4CAF50;
             text-align: center;
             margin-bottom: 30px;
         }
 
+        /* Table styling */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
 
+        /* Border and padding for table, headers, and data cells */
         table,
         th,
         td {
@@ -38,15 +48,18 @@
             text-align: left;
         }
 
+        /* Style for table headers */
         th {
             background-color: #4CAF50;
             color: white;
         }
 
+        /* Style for table data cells */
         td {
             background-color: #f9f9f9;
         }
 
+        /* General button styling */
         button {
             background-color: #4CAF50;
             color: white;
@@ -57,10 +70,12 @@
             transition: background-color 0.3s;
         }
 
+        /* Hover effect for buttons */
         button:hover {
             background-color: #45a049;
         }
 
+        /* Styling for delete buttons (dangerous actions) */
         .danger-button {
             background-color: #f44336;
         }
@@ -69,20 +84,25 @@
             background-color: #e53935;
         }
 
+        /* Styling for links */
         a {
             color: #4CAF50;
             text-decoration: none;
             font-size: 14px;
         }
 
+        /* Hover effect for links */
         a:hover {
             text-decoration: underline;
         }
 
+        /* Center alignment class */
         .center {
             text-align: center;
         }
     </style>
+
+    <!-- JavaScript for deleting an animal by sending a POST request -->
     <script>
         function deleteAnimal(animalId) {
             fetch(`/delete`, {
@@ -94,8 +114,10 @@
             }).then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        // Remove the row for the deleted animal from the table
                         document.getElementById(animalId).remove();
                     } else {
+                        // Alert the user if an error occurs
                         alert(data.error);
                     }
                 }).catch(error => console.error('Error:', error));
@@ -104,11 +126,15 @@
 </head>
 
 <body>
+    <!-- Main heading of the page -->
     <h1>Animal Shelter Management</h1>
 
+    <!-- Check if there are no animals in the shelter -->
     {% if no_animals %}
     <p class="center">No animals found in the shelter.</p>
     {% else %}
+    
+    <!-- Table to display animal information -->
     <table>
         <tr>
             <th>Name</th>
@@ -116,15 +142,20 @@
             <th>Breed</th>
             <th>Actions</th>
         </tr>
+
+        <!-- Loop through each animal and display its details in the table -->
         {% for animal in animals %}
         <tr id="{{ animal.animal_id }}">
             <td>{{ animal.name }}</td>
             <td>{{ animal.animal_type }}</td>
             <td>{{ animal.breed }}</td>
             <td>
+                <!-- Button to update the animal's information -->
                 <a href="{{ url_for('update_animal_form', animal_id=animal.animal_id) }}">
                     <button type="button">Update</button>
                 </a>
+                
+                <!-- Button to delete the animal, triggering the deleteAnimal function -->
                 <button type="button" class="danger-button"
                     onclick="deleteAnimal('{{ animal.animal_id }}')">Delete</button>
             </td>
@@ -133,6 +164,7 @@
     </table>
     {% endif %}
 
+    <!-- Action buttons to create a new animal, generate reports, or logout -->
     <div class="center">
         <a href="{{ url_for('create_animal') }}"><button>Create New Animal</button></a>
         <a href="{{ url_for('generate_report') }}"><button>Generate Report</button></a>
