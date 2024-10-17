@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags for character encoding and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Animal | Animal Shelter</title>
+
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- Internal styles for form layout and aesthetics -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        /* Style for delete button */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e60000;
+        }
+
+        /* Style for the link to navigate back to the home page */
+        a {
+            margin-top: 15px;
+            display: block;
+            font-size: 14px;
+            color: #4CAF50;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Container for the delete form -->
+    <div class="form-container">
+        <h1>Delete Animal Record</h1>
+
+        <!-- Display confirmation message with the animal ID -->
+        <p>Are you sure you want to delete the animal with ID <strong>{{ animal_id }}</strong>?</p>
+
+        <!-- Form to submit the delete request, sends a POST request to the 'delete_animal' route -->
+        <form action="{{ url_for('delete_animal') }}" method="POST">
+            <!-- Hidden input field to pass the animal_id -->
+            <input type="hidden" name="animal_id" value="{{ animal_id }}">
+            
+            <!-- Submit button to delete the animal -->
+            <button type="submit">Delete</button>
+        </form>
+
+        <br>
+
+        <!-- Link to go back to the home page without deleting the animal -->
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </div>
+</body>
+
+</html>

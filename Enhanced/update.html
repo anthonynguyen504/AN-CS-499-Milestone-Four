@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Animal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* General body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Main heading style */
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Form container styles */
+        form {
+            max-width: 500px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Label styles */
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Input styles for text and date fields */
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Submit button styles */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for the submit button */
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Link styles */
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Hover effect for links */
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page heading -->
+    <h1>Update Animal Information</h1>
+
+    <!-- Form for updating animal information -->
+    <form method="POST" action="{{ url_for('update_animal') }}">
+        <!-- Hidden field for animal ID -->
+        <input type="hidden" name="animal_id" value="{{ animal.animal_id }}" required>
+
+        <!-- Input fields for animal details -->
+        <label for="name">Name:</label><br>
+        <input type="text" name="name" value="{{ animal.name }}" required><br>
+
+        <label for="animal_type">Animal Type:</label><br>
+        <input type="text" name="animal_type" value="{{ animal.animal_type }}" required><br>
+
+        <label for="breed">Breed:</label><br>
+        <input type="text" name="breed" value="{{ animal.breed }}" required><br>
+
+        <label for="color">Color:</label><br>
+        <input type="text" name="color" value="{{ animal.color }}"><br>
+
+        <label for="date_of_birth">Date of Birth:</label><br>
+        <input type="date" name="date_of_birth" value="{{ animal.date_of_birth }}"><br>
+
+        <label for="outcome_type">Outcome Type:</label><br>
+        <input type="text" name="outcome_type" value="{{ animal.outcome_type }}"><br>
+
+        <!-- Submit button to update animal information -->
+        <input type="submit" value="Update Animal">
+    </form>
+
+    <!-- Link to return to the home page -->
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+
+</html>
